@@ -1,2 +1,5 @@
+Flask==2.3.2
 Flask
-Flask-MySQLdb
+gunicorn
+psycopg2-binary
+flask_sqlalchemy

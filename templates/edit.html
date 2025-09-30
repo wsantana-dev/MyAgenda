@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Editar Contato</h2>
-    <form method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" value="{{ contato.nome }}" required><br>
+<h2>✏️ Editar Contato</h2>
+<form method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome" value="{{ contato.nome }}" required>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="{{ contato.email }}" required><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" value="{{ contato.email }}" required>
 
-        <label for="telefone">Telefone:</label>
-        <input type="text" name="telefone" value="{{ contato.telefone }}" required><br>
+    <label for="telefone">Telefone:</label>
+    <input type="text" name="telefone" id="telefone" value="{{ contato.telefone }}" required>
 
-        <button type="submit">Salvar</button>
-    </form>
+    <button type="submit">Salvar Alterações</button>
+</form>
 {% endblock %}

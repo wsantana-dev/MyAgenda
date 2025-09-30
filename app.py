@@ -2,15 +2,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 import psycopg2.extras
-import traceback  # <- Adiciona para capturar erros detalhados
 
 app = Flask(__name__)
-
-# Middleware de erro global (deve vir logo após criar o app)
-@app.errorhandler(Exception)
-def handle_exception(e):
-    app.logger.error(traceback.format_exc())  # loga o erro completo nos logs
-    return "Internal Server Error", 500
 
 # Pega as variáveis do ambiente
 DB_HOST = os.getenv('DB_HOST')
@@ -43,21 +36,24 @@ def index():
 @app.route('/add', methods=('GET', 'POST'))
 def add():
     if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        telefone = request.form['telefone']
+        try:
+            nome = request.form['nome']
+            email = request.form['email']
+            telefone = request.form['telefone']
 
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute('INSERT INTO contatos (nome, email, telefone) VALUES (%s, %s, %s)',
-                    (nome, email, telefone))
-        conn.commit()
-        cur.close()
-        conn.close()
-        return redirect(url_for('index'))
+            conn = get_db_connection()
+            cur = conn.cursor()
+            cur.execute('INSERT INTO contatos (nome, email, telefone) VALUES (%s, %s, %s)',
+                        (nome, email, telefone))
+            conn.commit()
+            cur.close()
+            conn.close()
+            return redirect(url_for('index'))
+        except Exception as e:
+            print("Erro ao inserir no banco:", e)  # erro no console/terminal
+            return "Erro interno no servidor", 500  # mensagem simples para o usuário
 
     return render_template('add.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-

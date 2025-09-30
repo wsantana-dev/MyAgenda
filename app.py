@@ -2,8 +2,15 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
 import psycopg2.extras
+import traceback  # <- Adiciona para capturar erros detalhados
 
 app = Flask(__name__)
+
+# Middleware de erro global (deve vir logo após criar o app)
+@app.errorhandler(Exception)
+def handle_exception(e):
+    app.logger.error(traceback.format_exc())  # loga o erro completo nos logs
+    return "Internal Server Error", 500
 
 # Pega as variáveis do ambiente
 DB_HOST = os.getenv('DB_HOST')
@@ -53,3 +60,4 @@ def add():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+

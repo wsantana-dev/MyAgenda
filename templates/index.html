@@ -10,8 +10,12 @@
         <p><strong>Email:</strong> {{ contato.email }}</p>
         <p><strong>Telefone:</strong> {{ contato.telefone }}</p>
 <div class="actions">
-    <a href="{{ url_for('edit', id=contato.id) }}">✏️ Editar</a>
-    <a href="{{ url_for('delete_contato', id=contato.id) }}" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️ Excluir</a>
+   <a href="{{ url_for('edit', id=contato.id) }}">✏️ Editar</a>
+
+<form action="{{ url_for('delete', id=contato.id) }}" method="POST" style="display:inline;">
+    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️ Excluir</button>
+</form>
+
 </div>
 
     </div>

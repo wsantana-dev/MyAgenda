@@ -1,27 +1,17 @@
 {% extends "base.html" %}
 
-{% extends "base.html" %}
-
 {% block content %}
-<div class="card form-card">
-    <h2>✏️ Editar Contato</h2>
+    <h2>Editar Contato</h2>
     <form method="POST">
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" value="{{ contato.nome }}" required>
-        </div>
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="{{ contato.nome }}" required><br>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ contato.email }}" required>
-        </div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ contato.email }}" required><br>
 
-        <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="text" id="telefone" name="telefone" value="{{ contato.telefone }}" required>
-        </div>
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" value="{{ contato.telefone }}" required><br>
 
-        <button type="submit" class="btn">💾 Atualizar</button>
+        <button type="submit">Salvar</button>
     </form>
-</div>
 {% endblock %}

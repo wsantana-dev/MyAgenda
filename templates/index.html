@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>📋 Lista de Contatos</h2>
+
+<div class="grid">
+    {% for contato in contatos %}
+    <div class="card">
+        <h3>{{ contato.nome }}</h3>
+        <p><strong>Email:</strong> {{ contato.email }}</p>
+        <p><strong>Telefone:</strong> {{ contato.telefone }}</p>
+<div class="actions">
+    <a href="{{ url_for('edit_contato', id=contato.id) }}">✏️ Editar</a>
+    <a href="{{ url_for('delete_contato', id=contato.id) }}" onclick="return confirm('Tem certeza que deseja excluir?')">🗑️ Excluir</a>
+</div>
+
+    </div>
+    {% else %}
+    <p>Nenhum contato encontrado.</p>
+    {% endfor %}
+</div>
+{% endblock %}
